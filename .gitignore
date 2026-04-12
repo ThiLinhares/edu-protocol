@@ -1,0 +1,15 @@
+# Variáveis de Ambiente e Segredos (CRÍTICO)
+.env
+.env.*
+
+# Foundry / Compilação
+out/
+cache/
+broadcast/
+
+# Node / Dependências (Se houver no futuro)
+node_modules/
+
+# Arquivos de Sistema Operacional
+.DS_Store
+Thumbs.db

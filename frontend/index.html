@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu Protocol</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+        button { display: block; width: 100%; padding: 10px; margin: 10px 0; font-size: 16px; cursor: pointer; }
+        button:disabled { background-color: #ccc; cursor: not-allowed; }
+        #status { margin-top: 20px; padding: 15px; border: 1px solid #ccc; background-color: #f9f9f9; border-radius: 5px; word-wrap: break-word; }
+        .info-box { border: 1px solid #eee; padding: 10px; margin-top: 15px; border-radius: 5px; background-color: #fafafa; }
+        .info-box p { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>Edu Protocol - DApp</h1>
+
+    <div id="wallet-info" class="info-box" style="display: none;">
+        <p><strong>Carteira Conectada:</strong> <span id="user-address"></span></p>
+        <p><strong>NFT Mintado (ID):</strong> <span id="nft-id">Nenhum</span></p>
+        <p><strong>Saldo de EDU Tokens:</strong> <span id="edu-balance">0</span></p>
+    </div>
+
+    <button id="btn-connect">1. Conectar Carteira</button>
+    <button id="btn-mint" disabled>2. Mint de NFT (Student Badge)</button>
+    <button id="btn-stake" disabled>3. Stake do NFT</button>
+    <button id="btn-unstake" disabled>Sacar NFT (Unstake)</button>
+    <button id="btn-vote" disabled>4. Votar na DAO</button>
+    <button id="btn-create-proposal" disabled>5. Criar Nova Proposta</button>
+
+    <div id="status"><strong>Status:</strong> Aguardando conexão...</div>
+    
+    <!-- Importa o módulo principal da aplicação -->
+    <script type="module" src="./src/app.js"></script>
+</body>
+</html>

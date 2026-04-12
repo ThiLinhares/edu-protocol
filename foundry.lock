@@ -1,0 +1,11 @@
+{
+  "lib/chainlink-brownie-contracts": {
+    "rev": "67887b84d3add02a25ef4145fc014e2f549509da"
+  },
+  "lib/forge-std": {
+    "rev": "f494b0c2c045dda3df3d761bc82209b9a015c4e7"
+  },
+  "lib/openzeppelin-contracts": {
+    "rev": "9cfdccd35350f7bcc585cf2ede08cd04e7f0ec10"
+  }
+}
