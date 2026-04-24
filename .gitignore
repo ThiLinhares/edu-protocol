@@ -7,6 +7,12 @@ out/
 cache/
 broadcast/
 
+# Hardhat / Compilação e Testes
+artifacts_hardhat/
+cache_hardhat/
+coverage/
+coverage.json
+
 # Node / Dependências (Se houver no futuro)
 node_modules/
 

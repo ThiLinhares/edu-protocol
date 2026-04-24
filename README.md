@@ -10,16 +10,34 @@ O **Edu Protocol** é uma infraestrutura descentralizada (Web3) criada para revo
 
 Projeto desenvolvido como trabalho prático para a **Residência em TIC - Trilha Web3 / Blockchain**.
 
+**👤 Aluno:** Francisco Thiago Linhares Morais  
+**🎥 Vídeo Demonstrativo:** [Acessar no Google Drive](https://drive.google.com/drive/folders/1NFO-NWGSICSvFuoYheZOaqgqLOws_DlW?usp=sharing)  
+
+---
+
+## 📖 Modelagem do Problema
+O ambiente educacional digital contemporâneo, notadamente os cursos online de longa duração (EAD), enfrenta um desafio sistêmico: a alta taxa de evasão e a dificuldade em manter o engajamento contínuo dos discentes. 
+
+O Edu Protocol surge como uma solução que introduz incentivos criptoeconômicos no processo de aprendizagem. Ao modelar a permanência e o mérito acadêmico como ativos digitais verificáveis, o protocolo alinha os interesses educacionais com recompensas financeiras e poder de governança, mitigando a evasão através da tokenização da atenção.
+
 ---
 
 ## 🏗️ Arquitetura de Smart Contracts
 
-O ecossistema é modular e composto por 4 contratos inteligentes principais integrados:
+O ecossistema possui uma arquitetura modular orientada a contratos inteligentes, fundamentada em Padrões Ethereum (ERC) rigorosos, com clara separação de responsabilidades:
 
-1. **`StudentBadge.sol` (ERC-721):** O "Crachá" do estudante. Um NFT *Soulbound-like* (limitado a 1 por carteira) que atua como identidade base e chave de acesso ao ecossistema.
-2. **`EduToken.sol` (ERC-20):** O token utilitário e de governança (`$EDU`). Possui emissão controlada exclusivamente pelo contrato de Staking.
-3. **`EduStaking.sol` (Vault):** Cofre de custódia onde o aluno deposita seu NFT para minerar tokens `$EDU` passivamente. Possui trava de tempo (*TimeLock*) e integra um Oráculo da Chainlink para aplicar multiplicadores de bônus baseados no preço do Ethereum.
-4. **`EduDAO.sol` (Governança):** Sistema de votação descentralizada. Exige um *Proposal Threshold* (100 EDU) para criação de propostas e um *Minimum Vote Power* (10 EDU) para participação.
+1. **`StudentBadge.sol` (Padrão ERC-721):** O "Crachá" do estudante. Diferente da fungibilidade, um histórico acadêmico não é intercambiável. Implementado como um NFT *Soulbound-like* restrito a um *mint* por carteira, ele atua como identidade base e chave de acesso, prevenindo ataques de Sybil.
+2. **`EduStaking.sol` (Cofre / Vault):** O aluno transfere a custódia temporária de seu NFT para este contrato. Durante o *TimeLock* (carência), o contrato mensura o tempo decorrido e calcula organicamente o rendimento passivo. Ele é o único agente com permissão de emitir recompensas.
+3. **`EduToken.sol` (Padrão ERC-20):** Token utilitário e de governança (`$EDU`). Com divisibilidade granular (18 casas decimais), permite que o staking pague recompensas proporcionais até ao nível dos segundos. Possui emissão infinita (*∞ Minting*), porém bloqueada por rígido Controle de Acesso (*Access Control*) restrito ao Vault.
+4. **`EduDAO.sol` (Governança):** O protocolo verifica os saldos instantâneos para conceder poder de participação. Exige um *Proposal Threshold* (100 EDU) para criação de propostas (proteção anti-spam) e um *Minimum Vote Power* (10 EDU) para votação ativa.
+
+---
+
+## 🔮 Integração com Oráculos (Chainlink)
+
+Para neutralizar o impacto da volatilidade do mercado de criptomoedas sobre a percepção de valor da recompensa do estudante, o protocolo implementa uma integração com os Data Feeds Descentralizados da Chainlink.
+
+O contrato `EduStaking` consome ativamente o par **ETH/USD**. A lógica parametrizada estabelece um limiar (*threshold*) fixo de USD $2.000. Se o preço do Ethereum sofrer desvalorização e cruzar esse limite inferior, o protocolo aciona um mecanismo de subsídio automático (`BONUS_MULTIPLIER`), **dobrando a taxa de emissão** de `$EDU` para proteger o engajamento do aluno.
 
 ---
 
@@ -40,18 +58,22 @@ Todos os contratos estão verificados e operacionais na rede de testes Ethereum 
 - **Oráculos:** Chainlink Data Feeds (ETH/USD).
 - **Frontend:** HTML5, CSS3, Vanilla JavaScript.
 - **Integração Web3:** Ethers.js v6, MetaMask.
-- **Segurança / Auditoria:** Slither Analyzer, Mythril, solidity-coverage, hardhat-gas-reporter.
+- **Segurança / Qualidade:** Slither Analyzer, Mythril, Padrão CEI (Checks-Effects-Interactions).
 
 ---
 
-## 🚀 Guia de Uso (Frontend DApp)
+##  Frontend e Integração Web3 (DApp)
 
-O frontend é construído de forma leve e fluida, sem a necessidade de *bundlers* complexos como Webpack ou Vite.
+A camada de interação cliente-blockchain foi desenvolvida com a biblioteca **ethers.js (v6)**. A arquitetura de injeção de dependência interage com o `window.ethereum`, delegando ao usuário a assinatura criptográfica de cada ação. Destaques da implementação:
+
+- **Gestão Assíncrona (Transações Atômicas):** A rotina de stake foi orquestrada com a invocação do `approve()` no ERC-721, seguida imediatamente pelo `stake()` no contrato cofre.
+- **Decodificação Dinâmica de Erros (ABI Parsing):** Reversões de bloco são interceptadas e traduzidas de códigos de baixo nível para mensagens legíveis na UI (ex: `EduDAO__VotingClosed`).
+- **Consumo de Eventos (Log Polling):** O estado da DApp é montado filtrando historicamente eventos (como `Transfer`) emitidos pelos nós, através da função `queryFilter()`, dispensando iterações custosas on-chain.
 
 ### Jornada do Usuário
 1. **Conectar Carteira:** O usuário autentica sua MetaMask na rede Sepolia.
 2. **Mint do Crachá:** O aluno emite seu `StudentBadge` (Transação única).
-3. **Stake:** O aluno aprova e trava seu NFT no contrato de Staking. O tempo de carência para saque é de 30 segundos (configuração de MVP para testes).
+3. **Stake:** O aluno aprova e trava seu NFT no contrato de Staking. O tempo de carência (*TimeLock*) é de 30 segundos para fins de testes do MVP.
 4. **Acúmulo de Recompensas:** Enquanto travado, o contrato calcula organicamente os rendimentos em `$EDU`.
 5. **Governança (DAO):** Ao atingir os limites estipulados de Tokens EDU, o usuário pode interagir com a DAO, seja criando novas propostas de votação ou votando em propostas abertas.
 
