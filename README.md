@@ -2,6 +2,7 @@
 
 [![Solidity](https://img.shields.io/badge/Solidity-%5E0.8.24-363636.svg?style=flat&logo=solidity)](https://soliditylang.org/)
 [![Foundry](https://img.shields.io/badge/Built%20with-Foundry-FF5934.svg)](https://getfoundry.sh/)
+[![Hardhat](https://img.shields.io/badge/Built%20with-Hardhat-FFF100.svg)](https://hardhat.org/)
 [![ethers.js](https://img.shields.io/badge/ethers.js-v6.7.0-274291.svg)](https://docs.ethers.org/v6/)
 [![Network](https://img.shields.io/badge/Network-Sepolia_Testnet-8C8C8C.svg)](https://sepolia.etherscan.io/)
 
@@ -35,11 +36,11 @@ Todos os contratos estão verificados e operacionais na rede de testes Ethereum 
 
 ## ⚙️ Tecnologias Utilizadas
 
-- **Blockchain / Backend:** Solidity, Foundry (Forge, Cast, Anvil, Chisel), OpenZeppelin Contracts.
+- **Blockchain / Backend:** Solidity (EVM target: Cancun), Foundry, Hardhat, OpenZeppelin Contracts v5.
 - **Oráculos:** Chainlink Data Feeds (ETH/USD).
 - **Frontend:** HTML5, CSS3, Vanilla JavaScript.
 - **Integração Web3:** Ethers.js v6, MetaMask.
-- **Segurança / Auditoria:** Slither Analyzer.
+- **Segurança / Auditoria:** Slither Analyzer, Mythril, solidity-coverage, hardhat-gas-reporter.
 
 ---
 
@@ -67,7 +68,7 @@ A maneira mais rápida de rodar a interface:
 
 ## 🛠️ Desenvolvimento e Testes de Smart Contracts
 
-Este projeto utiliza o *framework* de desenvolvimento Foundry. 
+Este projeto utiliza uma infraestrutura robusta e híbrida de testes, integrando as vantagens do **Foundry** (rápido e nativo em Solidity) e do **Hardhat** (flexível e baseado em JavaScript/Ethers.js).
 
 ### Instalação e Compilação
 ```bash
@@ -76,6 +77,9 @@ forge install
 
 # Compilar os contratos
 forge build
+
+# Instalar dependências do ecossistema JS/Hardhat
+npm install
 
 # Configurar Variáveis de Ambiente
 # Copie o arquivo .env.example para .env e preencha com a sua PRIVATE_KEY

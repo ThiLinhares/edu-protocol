@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for staking\EduStaking.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">staking/</a> EduStaking.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">28.57% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>6/21</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">33.33% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>6/18</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">60% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>3/5</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">38.46% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>10/26</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.24;
+&nbsp;
+import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import {IERC721} from "@openzeppelin/contracts/token/ERC721/IERC721.sol";
+import {IAggregatorV3} from "../interfaces/IAggregatorV3.sol";
+&nbsp;
+/// @dev Interface mínima para interagir com o contrato EduToken.
+interface IEduToken {
+    function mint(address to, uint256 amount) external;
+}
+&nbsp;
+/// @title EduStaking - Contrato de Staking com Subsídio via Oráculo
+contract EduStaking is ReentrancyGuard {
+    // Custom Errors
+    error EduStaking__NotOwnerOfNFT();
+    error EduStaking__InvalidPrice();
+    error EduStaking__StakingTimeNotMet();
+&nbsp;
+    /// @notice O contrato do NFT StudentBadge, necessário para o staking.
+    IERC721 public immutable STUDENT_BADGE;
+    /// @notice O contrato do token de recompensa EDU.
+    IEduToken public immutable EDU_TOKEN;
+    /// @notice A interface do oráculo de preços ETH/USD do Chainlink.
+    IAggregatorV3 public immutable PRICE_FEED;
+&nbsp;
+    /// @notice A taxa base de emissão de recompensas em EDU por segundo.
+    uint256 public constant BASE_REWARD_RATE = 1 * 10 ** 15; // 0.001 EDU por segundo
+    /// @notice O multiplicador de bônus aplicado às recompensas quando o preço do ETH está baixo.
+    uint256 public constant BONUS_MULTIPLIER = 2; // Bônus de 2x
+    /// @notice Tempo mínimo que o NFT deve permanecer em stake antes de poder ser retirado.
+    uint256 public constant MIN_STAKING_TIME = 30 seconds;
+    /// @notice O limiar de preço do ETH em USD. Se o preço cair abaixo disso, o bônus é ativado.
+    int256 public constant ETH_PRICE_THRESHOLD = 2000 * 10 ** 8; // $2000 USD (Chainlink usa 8 decimais)
+&nbsp;
+    /// @dev Estrutura para armazenar informações sobre cada NFT em stake.
+    struct StakeInfo {
+        address owner; // O dono original do NFT (160 bits).
+        uint64 timestamp; // O momento em que o stake foi realizado (64 bits).
+    }
+&nbsp;
+    /// @notice Mapeamento do ID do token para as informações do seu stake.
+    mapping(uint256 =&gt; StakeInfo) public stakes;
+&nbsp;
+    /// @dev Emitido quando um NFT é colocado em stake.
+    event Staked(address indexed user, uint256 indexed tokenId);
+    /// @dev Emitido quando um NFT é retirado do stake.
+    event Unstaked(address indexed user, uint256 indexed tokenId, uint256 reward);
+&nbsp;
+    /// @dev Inicializa o contrato com os endereços das suas dependências.
+    /// @param _badge O endereço do contrato StudentBadge (NFT).
+    /// @param _token O endereço do contrato EduToken (ERC20).
+    /// @param _priceFeed O endereço do oráculo de preços ETH/USD do Chainlink.
+    constructor(address _badge, address _token, address _priceFeed) {
+        STUDENT_BADGE = IERC721(_badge);
+        EDU_TOKEN = IEduToken(_token);
+        PRICE_FEED = IAggregatorV3(_priceFeed);
+    }
+&nbsp;
+    /// @notice Trava o NFT no contrato
+    /// @param tokenId O ID do NFT StudentBadge a ser colocado em stake.
+    function stake(uint256 tokenId) external <span class="missing-if-branch" title="else path not taken" >E</span>nonReentrant {
+        // [CHECKS]
+        if (STUDENT_BADGE.ownerOf(tokenId) != msg.sender) revert EduStaking__NotOwnerOfNFT();
+&nbsp;
+        // [EFFECTS]
+        stakes[tokenId] = StakeInfo({owner: msg.sender, timestamp: uint64(block.timestamp)});
+&nbsp;
+        // [INTERACTIONS]
+        STUDENT_BADGE.transferFrom(msg.sender, address(this), tokenId);
+&nbsp;
+        emit Staked(msg.sender, tokenId);
+    }
+&nbsp;
+    /// @notice Destrava o NFT e minera as recompensas baseadas no Oráculo
+    /// @param tokenId O ID do NFT a ser retirado do stake.
+    function unstake(uint256 tokenId) external <span class="missing-if-branch" title="else path not taken" >E</span>nonReentrant {
+        // [CHECKS]
+        StakeInfo memory info = stakes[tokenId];
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (info.owner != msg.sender) revert EduStaking__NotOwnerOfNFT();
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (block.timestamp &lt; info.timestamp + MIN_STAKING_TIME) revert EduStaking__StakingTimeNotMet();
+&nbsp;
+        // [EFFECTS]
+<span class="cstat-no" title="statement not covered" >        uint256 reward = _calculateReward(info);</span>
+        delete stakes[tokenId]; // Previne reentrância lógica
+&nbsp;
+        // [INTERACTIONS]
+<span class="cstat-no" title="statement not covered" >        if (reward &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >            EDU_TOKEN.mint(msg.sender, reward)</span>;
+        }
+<span class="cstat-no" title="statement not covered" >        STUDENT_BADGE.transferFrom(address(this), msg.sender, tokenId)</span>;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        emit Unstaked(msg.sender, tokenId, reward);</span>
+    }
+&nbsp;
+    /// @notice Calcula a recompensa com base no tempo e no preço do ETH
+    /// @param tokenId O ID do NFT para o qual a recompensa será calculada.
+    /// @return A quantidade de recompensa em EDU acumulada.
+<span class="fstat-no" title="function not covered" >    function calculateReward(uint256 tokenId) public view returns (uint256) {</span>
+<span class="cstat-no" title="statement not covered" >        StakeInfo memory info = stakes[tokenId];</span>
+<span class="cstat-no" title="statement not covered" >        if (info.owner == address(0)) <span class="cstat-no" title="statement not covered" >return 0;</span></span>
+<span class="cstat-no" title="statement not covered" >        return _calculateReward(info);</span>
+    }
+&nbsp;
+    /// @dev Lógica interna para o cálculo da recompensa, evitando SLOADs duplicados.
+    /// @param info A struct `StakeInfo` do NFT, já carregada em memória.
+<span class="fstat-no" title="function not covered" >    function _calculateReward(StakeInfo memory info) private view returns (uint256) {</span>
+<span class="cstat-no" title="statement not covered" >        uint256 timeStaked = block.timestamp - info.timestamp;</span>
+<span class="cstat-no" title="statement not covered" >        uint256 reward = timeStaked * BASE_REWARD_RATE;</span>
+&nbsp;
+        // Leitura do Oráculo Chainlink
+<span class="cstat-no" title="statement not covered" >        (, int256 price,,,) = PRICE_FEED.latestRoundData();</span>
+<span class="cstat-no" title="statement not covered" >        if (price &lt;= 0) revert EduStaking__InvalidPrice();</span>
+&nbsp;
+        // Subsídio: Se o ETH estiver barato (abaixo do limiar), ganha bônus
+<span class="cstat-no" title="statement not covered" >        if (price &lt; ETH_PRICE_THRESHOLD) {</span>
+            reward = reward * BONUS_MULTIPLIER;
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return reward;</span>
+    }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Apr 23 2026 20:22:44 GMT-0300 (Horário Padrão de Brasília)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

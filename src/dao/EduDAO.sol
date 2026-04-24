@@ -47,15 +47,14 @@ contract EduDAO {
 
     /// @notice Cria uma nova proposta de governança.
     /// @dev O criador da proposta deve possuir o saldo mínimo definido em `PROPOSAL_THRESHOLD`.
-    /// @param _descriptionHash O hash da descrição da proposta (ex: keccak256 da descrição em texto).
-    function createProposal(bytes32 _descriptionHash) external {
+    /// @param descriptionHash O hash da descrição da proposta (ex: keccak256 da descrição em texto).
+    function createProposal(bytes32 descriptionHash) external {
         if (EDU_TOKEN.balanceOf(msg.sender) < PROPOSAL_THRESHOLD) revert EduDAO__InsufficientTokensToPropose();
 
         uint256 id = nextProposalId++;
-        proposals[id] = Proposal({
-            descriptionHash: _descriptionHash, votesFor: 0, votesAgainst: 0, deadline: uint64(block.timestamp + 3 days)
-        });
-        emit ProposalCreated(id, _descriptionHash, proposals[id].deadline);
+        proposals[id] =
+            Proposal({descriptionHash: descriptionHash, votesFor: 0, votesAgainst: 0, deadline: uint64(block.timestamp + 3 days)});
+        emit ProposalCreated(id, descriptionHash, proposals[id].deadline);
     }
 
     /// @notice Registra um voto em uma proposta ativa.
@@ -65,13 +64,13 @@ contract EduDAO {
         uint256 voterBalance = EDU_TOKEN.balanceOf(msg.sender);
 
         // [CHECKS]
+        if (proposalId >= nextProposalId) revert EduDAO__ProposalDoesNotExist();
         // Garante que o saldo do votante cabe em um uint128 para evitar overflow no peso do voto.
         // Esta verificação é feita primeiro para evitar um pânico de overflow em vez de um erro personalizado.
         if (voterBalance > type(uint128).max) revert EduDAO__BalanceTooLargeForVoteWeight();
         if (voterBalance < MIN_VOTE_POWER) revert EduDAO__InsufficientTokens();
 
         Proposal storage p = proposals[proposalId];
-        if (p.deadline == 0) revert EduDAO__ProposalDoesNotExist();
         if (block.timestamp > p.deadline) revert EduDAO__VotingClosed();
         if (hasVoted[proposalId][msg.sender]) revert EduDAO__AlreadyVoted();
 

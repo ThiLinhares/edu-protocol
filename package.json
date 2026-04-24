@@ -1,0 +1,31 @@
+{
+  "name": "meu_protocolo_edu",
+  "version": "1.0.0",
+  "description": "[![Solidity](https://img.shields.io/badge/Solidity-%5E0.8.24-363636.svg?style=flat&logo=solidity)](https://soliditylang.org/)\r [![Foundry](https://img.shields.io/badge/Built%20with-Foundry-FF5934.svg)](https://getfoundry.sh/)\r [![ethers.js](https://img.shields.io/badge/ethers.js-v6.7.0-274291.svg)](https://docs.ethers.org/v6/)\r [![Network](https://img.shields.io/badge/Network-Sepolia_Testnet-8C8C8C.svg)](https://sepolia.etherscan.io/)",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThiLinhares/edu-protocol.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ThiLinhares/edu-protocol/issues"
+  },
+  "homepage": "https://github.com/ThiLinhares/edu-protocol#readme",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^6.1.2",
+    "hardhat": "^2.28.6",
+    "hardhat-gas-reporter": "^2.3.0",
+    "solidity-coverage": "^0.8.17"
+  }
+}
